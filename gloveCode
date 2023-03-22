@@ -1,0 +1,65 @@
+#include "SoftwareSerial.h"
+
+void printDetail(uint8_t type, int value);
+
+unsigned int flex_val;
+unsigned int g;
+SoftwareSerial mySoftwareSerial(10,9);
+
+void setup()
+{
+  
+  
+  
+  mySoftwareSerial.begin(9600);
+  Serial.begin(9600);
+  mySoftwareSerial.println("HELLO  I Am Ready to speak");
+   
+  Serial.println("Initializing connection to phone...");
+  
+}
+
+void loop()
+{
+  
+  if (mySoftwareSerial.available()){
+    
+    mySoftwareSerial.println("Your Vocal is Ready to speak");
+    delay(6000);
+  }
+  
+  Serial.println("Connection Successful");
+  int flex_val_1 = analogRead(A1);
+  int flex_val_2 = analogRead(A2);
+  String f="F : ";
+  String g="G : ";
+  String fValue=f+flex_val_1;
+  String gValue=g+flex_val_2;
+  Serial.println(fValue);
+  Serial.println(gValue);
+  
+  if (flex_val_1 >=935 && flex_val_1 <938)                      
+  {
+    
+    mySoftwareSerial.println("Please Give me water");
+    delay(2000);
+    
+    
+  }
+  else if (flex_val_1 >= 938 && flex_val_1 <940)  
+  {
+    
+    mySoftwareSerial.println("Please Give Me Food");
+    
+    delay(2000);
+  }
+  else if (flex_val_1>=940 && flex_val_1<=950)  
+  {
+    
+    mySoftwareSerial.println("I need help");
+    
+    delay(1000);
+  }
+  
+  delay(3000);
+}
